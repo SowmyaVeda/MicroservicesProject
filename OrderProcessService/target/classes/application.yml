@@ -1,0 +1,28 @@
+spring.application.name: order-process-service
+spring.kafka:
+  #  bootstrap-servers: localhost:9092
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.LongSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  streams:
+    properties:
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$LongSerde
+      default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+      spring.json.trusted.packages: "*"
+    state-dir: /tmp/kafka-streams/
+
+spring.output.ansi.enabled: ALWAYS
+
+logging.pattern.console: "%clr(%d{HH:mm:ss.SSS}){blue} %clr(---){faint} %clr([%15.15t]){yellow} %clr(:){red} %clr(%m){faint}%n"
+
+spring:
+  datasource:
+    password: Root@123
+    url: jdbc:mysql://localhost:3306/msproject?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    show-sql: true
+  config:
+    import: optional:configserver:http://localhost:8071
