@@ -1,0 +1,63 @@
+-DEPENDENCIES-
+
+web
+jpa
+postgres
+mongodb*
+config_client
+eureka_client
+lombok
+spring-cloud-starter-sleuth
+spring-cloud-sleuth-zipkin
+webflux
+kafka
+prometheus
+redis
+jackson
+
+---
+
+JACKSON: Dependency and Demo Code with Kafka is in projects: testserviceone and testservicetwo
+
+REDIS: Running on port 6379 | RedisInsight installed | Client code in testspringredis
+
+KAFKA: installed in indiagator/kafka
+    commands:
+    ./zookeeper-server-stop.sh
+    ./zookeeper-server-start.sh ../config/zookeeper.properties
+    ./kafka-server-stop.sh
+    ./kafka-server-start.sh ../config/server.properties
+
+ZIPKIN: docker run -d -p 9411:9411 openzipkin/zipkin
+
+FIRST_CREATE_DOCKER_NETWORK : docker network create -d bridge grafprom
+
+PROMETHEUS/grafana integration is in old buyer/seller service projects
+
+ - prometheus.yml file has to be created and docker run with that file and --network host
+    run prometheus from the directory where you place prometheus.yml [it's here in the root of this project]
+       docker run -d --network grafprom  --name=prometheus -p 9090:9090 -v ./prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus --config.file=/etc/prometheus/prometheus.yml
+     LOCAL_INSTALLATION: /home/indiagator/prometheus/prometheus-2.47.0-rc.0.linux-amd64/prometheus --config.file=prometheus.yml
+
+
+GRAFANA - docker run with --network host
+    docker run -d -p 3000:3000 --name=grafana --network grafprom  grafana/grafana-enterprise
+    LOCAL_INSTALLATION:  sudo /bin/systemctl start grafana-server
+
+links:
+https://tanzu.vmware.com/developer/guides/spring-prometheus/
+
+---
+GKE : https://cloud.google.com/kubernetes-engine/docs/how-to/exposing-apps
+
+Kuberbetes | minikube
+Start Docker Desktop
+minikube start
+kubectl create deployment admin-service --image=indiagator/adminservice:18aug1prod
+kubectl --port-forward | can be done through intellij
+kubectl scale deployment auth-service --replicas=4
+kubectl set image deployments/admin-service adminservice=indiagator/adminservice:18aug2prod | second argument is container name
+                                                                                                derived from image name
+                                                                                                not the service name
+
+
