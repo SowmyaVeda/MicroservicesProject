@@ -1,4 +1,4 @@
-spring.application.name: order-process-service
+spring.application.name: orderprocessservice
 spring.kafka:
   #  bootstrap-servers: localhost:9092
   producer:
