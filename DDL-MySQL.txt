@@ -1,0 +1,32 @@
+CREATE TABLE `orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `price` int DEFAULT NULL,
+  `status` varchar(15) DEFAULT NULL,
+  `source` varchar(15) DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `product_count` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8222 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+
+CREATE TABLE `customers` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(50) DEFAULT NULL,
+  `customer_email` varchar(50) NOT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `amount_reserved` int DEFAULT NULL,
+  `amount_available` int DEFAULT NULL,
+  PRIMARY KEY (`Id`,`customer_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `products` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(20) NOT NULL,
+  `count` int NOT NULL,
+  `price` int NOT NULL,
+  `active` bit(1) DEFAULT NULL,
+  `reserved_count` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
